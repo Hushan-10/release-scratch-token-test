@@ -1,0 +1,20 @@
+name: publish-release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Publish like jac does
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release create v0.0.2 --draft --title v0.0.2 --notes "GITHUB_TOKEN test"
+          gh release edit v0.0.2 --draft=false --latest
